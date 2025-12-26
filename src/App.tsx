@@ -4,7 +4,7 @@ import Heder from "./components/Header";
 import useCart from "./hooks/useCart";
 import { cartReducer, initialState } from "./reducers/cart-reducer";
 function App() {
-  const {decreaseFromCart, increseFromCart, clearCart} = useCart();
+  const {clearCart} = useCart();
 
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
@@ -13,8 +13,6 @@ function App() {
       <Heder
         cart={state.cart}
         dispatch={dispatch}
-        increseFromCart={increseFromCart}
-        decreaseFromCart={decreaseFromCart}
         clearCart={clearCart}
       />
       <main className="container-xl mt-5">
