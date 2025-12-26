@@ -59,7 +59,8 @@ export type CartActions =
     if(action.type === "remove-from-cart") {
 
       return {
-        ...state
+        ...state,
+        cart: state.cart.filter(item => item.id !== action.payload.id)
       }
     }
 

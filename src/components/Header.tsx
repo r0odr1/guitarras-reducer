@@ -1,16 +1,18 @@
 import { useMemo } from "react";
+import type { Dispatch } from "react";
 import type { CartItem, Guitar } from "../types";
+import type { CartActions } from "../reducers/cart-reducer";
 
 type HeaderProps = {
   cart: CartItem[];
-  removeFromCart: (id: Guitar['id']) => void;
+  dispatch: Dispatch<CartActions>
   increseFromCart: (id: Guitar['id']) => void;
   decreaseFromCart: (id: Guitar['id']) => void;
   clearCart: () => void;
 }
 function Heder({
     cart,
-    removeFromCart,
+    dispatch,
     increseFromCart,
     decreaseFromCart,
     clearCart,
@@ -86,7 +88,7 @@ function Heder({
                               <button
                                 className="btn btn-danger"
                                 type="button"
-                                onClick={() => removeFromCart(guitar.id)}>
+                                onClick={() => dispatch({type: "remove-from-cart", payload: {id: guitar.id}})}>
                                 X
                               </button>
                             </td>
