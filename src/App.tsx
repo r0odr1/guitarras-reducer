@@ -1,11 +1,11 @@
+import { useReducer } from "react";
 import Guitar from "./components/Guitar";
 import Heder from "./components/Header";
 import useCart from "./hooks/useCart";
+import { cartReducer, initialState } from "./reducers/cart-reducer";
 function App() {
   const {
-    data,
     cart,
-    addToCart,
     removeFromCart,
     decreaseFromCart,
     increseFromCart,
@@ -14,7 +14,8 @@ function App() {
     cartTotal,
   } = useCart();
 
-  
+  const [state, dispatch] = useReducer(cartReducer, initialState)
+
   return (
     <>
       <Heder
@@ -30,11 +31,11 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map((guitar) => (
+          {state.data.map((guitar) => (
             <Guitar
               key={guitar.id}
               guitar={guitar}
-              addToCart={addToCart} />
+              dispatch={dispatch} />
           ))}
         </div>
       </main>

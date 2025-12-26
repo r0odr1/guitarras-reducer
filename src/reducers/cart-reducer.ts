@@ -1,4 +1,5 @@
-import type { Guitar } from "../types";
+import { db } from "../data/db";
+import type { CartItem, Guitar } from "../types";
 
 
 export type CartActions =
@@ -8,3 +9,55 @@ export type CartActions =
   { type: 'increase-quantity', payload: {id: Guitar['id']} } |
   { type: 'cleare-cart' }
   
+  export type CartState = {
+    data: Guitar[]
+    cart: CartItem[]
+  }
+
+  export const initialState : CartState = {
+    data: db,
+    cart: []
+  }
+
+  export const cartReducer = (
+    state: CartState = initialState,
+    action: CartActions
+  ) => {
+
+    if(action.type === "add-to-cart") {
+
+      return {
+        ...state
+      }
+    }
+
+    if(action.type === "remove-from-cart") {
+
+      return {
+        ...state
+      }
+    }
+
+    if(action.type === "decrease-quantity") {
+
+      return {
+        ...state
+      }
+    }
+
+    if(action.type === "increase-quantity") {
+
+      return {
+        ...state
+      }
+    }
+
+    if(action.type === "cleare-cart") {
+
+      return {
+        ...state
+      }
+    }
+
+    return state
+  }
