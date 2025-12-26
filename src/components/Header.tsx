@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import type { CartItem, Guitar } from "../types";
 
 type HeaderProps = {
@@ -6,8 +7,6 @@ type HeaderProps = {
   increseFromCart: (id: Guitar['id']) => void;
   decreaseFromCart: (id: Guitar['id']) => void;
   clearCart: () => void;
-  isEmmpty: boolean;
-  cartTotal: number;
 }
 function Heder({
     cart,
@@ -15,9 +14,10 @@ function Heder({
     increseFromCart,
     decreaseFromCart,
     clearCart,
-    isEmmpty,
-    cartTotal
   } : HeaderProps ) {
+
+    const isEmmpty = useMemo( () => cart.length === 0, [cart]);
+    const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart]);
 
     return (
       <header className="py-5 header">

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useMemo } from "react";
 import type { Guitar, CartItem } from "../types";
 
 const useCart = () => {
@@ -17,19 +16,6 @@ const useCart = () => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-  function addToCart(item: Guitar) {
-    const itemExist = cart.findIndex((guitar) => guitar.id === item.id);
-    if (itemExist >= 0) {
-      if(cart[itemExist].quantity >= MAX_ITEMS) return;
-      const updatedCart = [...cart];
-      updatedCart[itemExist].quantity++;
-      setCart(updatedCart);
-    } else {
-      const newItem : CartItem = {... item, quantity: 1};
-      setCart([...cart, newItem]);
-    }
-  }
 
   function removeFromCart(id: Guitar['id']) {
     setCart(prevCart => prevCart.filter(guitar => guitar.id !== id));
@@ -64,19 +50,13 @@ const useCart = () => {
   function clearCart() {
     setCart([]);
   }
-
-  const isEmmpty = useMemo( () => cart.length === 0, [cart]);
-  const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart]);
   
   return {
     cart,
-    addToCart,
     removeFromCart,
     decreaseFromCart,
     increseFromCart,
     clearCart,
-    isEmmpty,
-    cartTotal
   }
 }
 
