@@ -101,7 +101,8 @@ export type CartActions =
     if(action.type === "cleare-cart") {
 
       return {
-        ...state
+        ...state,
+        cart: []
       }
     }
 

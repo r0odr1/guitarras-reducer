@@ -6,13 +6,8 @@ import type { CartActions } from "../reducers/cart-reducer";
 type HeaderProps = {
   cart: CartItem[];
   dispatch: Dispatch<CartActions>
-  clearCart: () => void;
 }
-function Heder({
-    cart,
-    dispatch,
-    clearCart,
-  } : HeaderProps ) {
+function Heder({ cart, dispatch } : HeaderProps ) {
 
     const isEmmpty = useMemo( () => cart.length === 0, [cart]);
     const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart]);
@@ -99,7 +94,7 @@ function Heder({
                   )}
                   <button
                     className="btn btn-dark w-100 mt-3 p-2"
-                    onClick={clearCart}>
+                    onClick={() => dispatch({type: "cleare-cart"})}>
                     Vaciar Carrito
                   </button>
                 </div>
